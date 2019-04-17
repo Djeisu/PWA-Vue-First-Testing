@@ -6,7 +6,13 @@
       </li>
     </ul>
     <main>
-      <router-view/>
+      <b-container class="bv-example-row">
+        <b-row class="justify-content-md-center">
+          <b-col cols="12" md="auto">
+            <router-view/>
+          </b-col>
+        </b-row>
+      </b-container>
     </main>
   </div>
 </template>
@@ -36,10 +42,6 @@ export default {
       {
         name: 'Home',
         to: '/'
-      },
-      {
-        name: 'Page 1',
-        to: '/page-1'
       },
       {
         name: 'Bad Link',
