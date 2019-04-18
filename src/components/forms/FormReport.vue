@@ -3,13 +3,13 @@
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
       <b-row>
         <b-col cols="6">
-          <b-form-group id="gender-group" label="Survivor:" label-for="gender" description="Inform the who will report">
+          <b-form-group id="gender-group" label="Survivor:" label-for="gender" description="Inform who will report">
             <b-form-select
               id="survivor_report_id"
               v-model="form.survivor_report_id"
               required
             >
-            <option v-for="survivor in survivors" :key="survivor.id" :value="survivor.id">{{survivor.name}}</option>
+              <option v-for="survivor in getNonAbducteds(survivors)" :key="survivor.id" :value="survivor.id">{{survivor.name}}</option>
             </b-form-select>
           </b-form-group>
         </b-col>
@@ -20,7 +20,7 @@
               v-model="form.survivor_abducted_id"
               required
             >
-            <option v-for="survivor in survivors" :key="survivor.id" :value="survivor.id">{{survivor.name}}</option>
+              <option v-for="survivor in getNonAbducteds(survivors)" :key="survivor.id" :value="survivor.id">{{survivor.name}}</option>
             </b-form-select>
           </b-form-group>
         </b-col>
@@ -66,9 +66,9 @@ export default {
     methods: {
       onSubmit(evt) {
         console.log(this.form)
-        // http.postSurvivor(this.form, survivor => {
-        //     this.form = survivor.data.data;
-        // })
+        http.postReportAbduction(this.form, survivor => {
+            this.form = survivor.data.data;
+        })
         evt.preventDefault()
         this.$router.push('/')
       },
@@ -86,9 +86,8 @@ export default {
           this.show = true
         })
       },
-      randomLocation(){
-        this.form.latitude = this.$faker().address.latitude()
-        this.form.longitude = this.$faker().address.longitude()
+      getNonAbducteds(obj){
+        return obj.filter(el => !el.abducted)
       }
     }
   }

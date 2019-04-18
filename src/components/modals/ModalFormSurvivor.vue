@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button id="show-btn" block variant="warning" @click="showModal">Create Survivor</b-button>
+    <b-button id="show-btn" block variant="warning" @click="showModal">Register Survivor</b-button>
 
     <b-modal ref="my-modal" hide-footer title="Register New Survivor">
       <div class="d-block">

@@ -8,9 +8,11 @@ import VueMaterial from 'vue-material';
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-Vue.use(BootstrapVue)
+import VueGraph from 'vue-graph'
 
+Vue.use(BootstrapVue)
 Vue.use(require('vue-faker'));
+Vue.use(VueGraph)
 
 Vue.config.productionTip = false;
 

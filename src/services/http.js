@@ -23,20 +23,44 @@ export default {
     postSurvivor: (body, callback) => {
         const urlXsunit = url + 'survivors';
         axios.post(urlXsunit, body,{'Content-Type': 'application/json'}).then((survivor) => {
-            console.log(survivor)
             if (callback) {
                 callback(survivor);
+                location.reload();
             }
         })
     },
     updateSurvivor: (body, callback) => {
-        console.log(body)
         const urlXsunit = url + 'survivors';
         axios.put(urlXsunit, body,{'Content-Type': 'application/json'}).then((survivor) => {
-            console.log(survivor)
             if (callback) {
                 callback(survivor);
+                location.reload();
             }
         })
-    }
+    },
+    postReportAbduction: (body, callback) => {
+        const urlXsunit = url + 'report';
+        axios.post(urlXsunit, body,{'Content-Type': 'application/json'}).then((report) => {
+            if (callback) {
+                callback(report);
+                location.reload();
+            }
+        })
+    },
+    getAbducteds: (callback) => {
+        const urlXsunit = url + 'report/abducteds/';
+        axios.get(urlXsunit,{'Content-Type': 'application/json'}).then((abducteds) => {
+            if (callback) {
+                callback(abducteds);
+            }
+        })
+    },
+    getNonAbducteds: (callback) => {
+        const urlXsunit = url + 'report/non-abducteds/';
+        axios.get(urlXsunit,{'Content-Type': 'application/json'}).then((nonabducteds) => {
+            if (callback) {
+                callback(nonabducteds);
+            }
+        })
+    },
 }
