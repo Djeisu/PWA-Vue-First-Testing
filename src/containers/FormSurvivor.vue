@@ -1,67 +1,74 @@
 <template>
   <div class="mt-4">
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        id="name-group"
-        label="Name:"
-        label-for="name"
-        description="Inform the name of survivor"
-      >
+      <b-form-group id="name-group" label="Name:" label-for="name" description="Inform the name of survivor">
         <b-form-input
           id="name"
           v-model="form.name"
-          type="email"
-          required
+          type="text"
           placeholder="Enter name"
+          required
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="age-group" label="Age:" label-for="age" description="Inform the age of survivor">
-        <b-form-input
-          id="age"
-          v-model="form.age"
-          required
-          placeholder="Enter age"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="gender-group" label="Gender:" label-for="gender">
-        <b-form-select
-          id="gender"
-          v-model="form.gender"
-          :options="genders"
-          required
-        ></b-form-select>
-      </b-form-group>
-
-      <b-form-group 
-        id="location-group"
-        label="Location:"
-        label-for="location"
-        description="Inform the name of survivor"
-      >
-        <b-row>
-          <b-col>
+      <b-row>
+        <b-col cols="6">
+          <b-form-group id="age-group" label="Age:" label-for="age" description="Inform the age of survivor">
             <b-form-input
-              id="latitude"
-              v-model="form.latitude"
+              id="age"
+              v-model="form.age"
+              placeholder="Enter age"
+              type="number"
+              min="1"
               required
-              placeholder="Latitude"
             ></b-form-input>
-          </b-col>
-          <b-col>
-            <b-form-input
-              id="longitude"
-              v-model="form.longitude"
+          </b-form-group>
+        </b-col>
+        <b-col cols="6">
+          <b-form-group id="gender-group" label="Gender:" label-for="gender" description="Inform the gender of survivor">
+            <b-form-select
+              id="gender"
+              v-model="form.gender"
+              :options="genders"
               required
-              placeholder="Longitude"
-            ></b-form-input>
-          </b-col>
-        </b-row>
-      </b-form-group>
+            ></b-form-select>
+          </b-form-group>
+        </b-col>
+      </b-row>
+        
+      <b-row>
+        <b-col cols="4">
+          <b-form-group 
+            id="location-group"
+            label="Location:"
+            label-for="location"
+          >
+            <b-form-input id="latitude" v-model="form.latitude" disabled required placeholder="Latitude"></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col cols="4">
+          <b-form-group 
+            id="location-group"
+            label="Location:"
+            label-for="location"
+          >
+            <b-form-input id="longitude" v-model="form.longitude" disabled required placeholder="Longitude"></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col cols="4">
+          <b-form-group class="text-center"
+            label="Generate Fake Location"
+          >
+            <b-button type="button" variant="outline-primary" block v-on:click="randomLocation()">Click Here!</b-button>
+          </b-form-group>
+        </b-col>
+      </b-row>
+      
+      <div class="mt-3 d-flex justify-content-center">
+        <b-button type="submit" class="mr-1" variant="primary">Submit</b-button>
+        <b-button type="reset" variant="danger">Reset</b-button>
+      </div>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
@@ -85,7 +92,7 @@ export default {
     data() {
       return {
         form: {
-          name: this.$faker().name.findName(),
+          name: '',
           age: null,
           gender: null,
           latitude: null,
@@ -95,10 +102,25 @@ export default {
         show: true
       }
     },
+    created() {
+      if(this.$route.query.id != undefined)
+        http.getSurvivor(this.$route.query.id, survivor => {
+          this.form = survivor.data.data
+        })
+    },
     methods: {
       onSubmit(evt) {
+        if(this.$route.query.id != undefined)
+          http.updateSurvivor(this.form, survivor => {
+            console.log(survivor);
+            this.form = survivor.data.data;
+          })
+        else
+          http.postSurvivor(this.form, survivor => {
+            this.form = survivor.data.data;
+          })
         evt.preventDefault()
-        alert(JSON.stringify(this.form))
+        this.$router.push('/')
       },
       onReset(evt) {
         evt.preventDefault()
@@ -113,6 +135,10 @@ export default {
         this.$nextTick(() => {
           this.show = true
         })
+      },
+      randomLocation(){
+        this.form.latitude = this.$faker().address.latitude()
+        this.form.longitude = this.$faker().address.longitude()
       }
     }
   }

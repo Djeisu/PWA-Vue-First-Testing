@@ -15,6 +15,7 @@ import PageNotFound from '@/containers/PageNotFound'
 Vue.use(Router)
 
 export default new Router({
+  mode: "history",
   routes: [
     {
       path: '/',

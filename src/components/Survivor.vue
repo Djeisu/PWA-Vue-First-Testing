@@ -1,33 +1,15 @@
 <template>
-    <b-card
-        img-src="https://picsum.photos/600/300/?image=25"
-        img-alt="Image"
-        img-top
-        tag="article"
-        style="max-width: 20rem;"
-        class="mb-2"
-        :title="name"
-        :sub-title="abducted"
-    >
-        <b-card-text>
-        Some quick example text to build on the card title and make up the bulk of the card's content.
-        </b-card-text>
-
-        <b-button href="#" variant="primary">Go somewhere</b-button>
-    </b-card>
-    <!-- <md-card class="card-default">
-        <h2></h2>
-        <p>{{abducted}}</p>
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{name}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
+    <b-card :bg-variant="abducted ? 'danger' : 'default'" :text-variant="abducted ? 'white' : ''" class="text-center"
+    tag="article"
+    style="width: 20rem; height: auto;"
+    :title="name">
+        <b-card-text :class="abducted ? 'text-white' : 'text-secondary'">{{gender}}, {{age}} years</b-card-text>
+        <b-alert show variant="light">{{abducted ? 'Abducted' : 'Non-abducted'}}</b-alert>
+        <b-button block variant='light' :href="'http://www.google.com/maps/place/' + latitude + ',' + longitude" target="_system">Open Last Location</b-button>
+        <div v-if="!abducted">
+            <b-button type="button" block variant='primary' class="mt-1">Report Abduction</b-button>
         </div>
-    </md-card> -->
+    </b-card>
 </template>
 
 <script>
@@ -38,8 +20,20 @@ export default {
             type: String,
             required: true
         },
+        age:{
+            type: Number,
+        },
+        gender:{
+            type: String,
+        },
         abducted: {
             type: Boolean
+        },
+        latitude:{
+            type: String,
+        },
+        longitude:{
+            type: String,
         }
     }
 }

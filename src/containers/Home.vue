@@ -1,15 +1,21 @@
 <template>
-  <div id="app">
+  <div id="app" class="mt-5">
     <b-container fluid>
-      <b-card-group deck>
+      <b-card-group deck class="justify-content-md-center">
         <div v-for="survivor in survivors" :key="survivor.id">
-          <survivor :name="survivor.name" :abducted="survivor.abducted"></survivor>
+          <survivor class="mb-4" 
+            :name="survivor.name"
+            :age="survivor.age"
+            :gender="survivor.gender"
+            :abducted="survivor.abducted"
+            :latitude="survivor.latitude"
+            :longitude="survivor.longitude"
+          ></survivor>
         </div>
       </b-card-group>
     </b-container>
   </div>
 </template>
-
 
 <style scoped>
 h1 {
@@ -38,12 +44,6 @@ export default {
     })
   },
   methods: {
-    // getImagem: function(survivors) {
-    //   if (quadrinho.images.length) {
-    //     return quadrinho.images[0].path + '/portrait_medium.jpg';
-    //   }
-    // }
-    // passar no no input :imagem="getImagem(quadrinho)"
   }
 }
 </script>
