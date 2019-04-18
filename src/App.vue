@@ -12,20 +12,20 @@
                 {{ link.name }}
             </b-nav-item>
           </b-navbar-nav>
-          <b-navbar-nav>
+          <!-- <b-navbar-nav>
             <b-nav-item-dropdown text="Reports" left>
               <b-dropdown-item v-for="(report, index) in reports" :key="index" :to="report.to">
                   {{ report.name }}
               </b-dropdown-item>
             </b-nav-item-dropdown>
-          </b-navbar-nav>
+          </b-navbar-nav> -->
 
-          <b-navbar-nav class="ml-auto">
+          <!-- <b-navbar-nav class="ml-auto">
             <b-nav-form>
               <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
               <b-button size="sm" class="my-2 my-sm-0" type="submit">Search by id</b-button>
             </b-nav-form>
-          </b-navbar-nav>
+          </b-navbar-nav> -->
         </b-collapse>
       </b-navbar>
     </div>
@@ -53,29 +53,29 @@ export default {
         name: 'Survivors',
         to: '/'
       },
-      {
-        name: 'Create Survivor',
-        to: '/form-survivor'
-      },
+      // {
+      //   name: 'Create Survivor',
+      //   to: '/form-survivor'
+      // },
       // {
       //   name: 'Bad Link',
       //   to: '/random-bad-url'
       // }
     ],
-    reports: [
-      {
-        name: 'Report Abduction',
-        to: '/'
-      },
-      {
-        name: 'Abducteds',
-        to: '/'
-      },
-      {
-        name: 'Non-Abducteds',
-        to: '/'
-      }
-    ]
+    // reports: [
+    //   {
+    //     name: 'Report Abduction',
+    //     to: '/'
+    //   },
+    //   {
+    //     name: 'Abducteds',
+    //     to: '/'
+    //   },
+    //   {
+    //     name: 'Non-Abducteds',
+    //     to: '/'
+    //   }
+    // ]
   })
 }
 </script>

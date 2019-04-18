@@ -7,14 +7,20 @@
         <b-alert show variant="light">{{abducted ? 'Abducted' : 'Non-abducted'}}</b-alert>
         <b-button block variant='light' :href="'http://www.google.com/maps/place/' + latitude + ',' + longitude" target="_system">Open Last Location</b-button>
         <div v-if="!abducted">
-            <b-button type="button" block variant='primary' class="mt-1">Report Abduction</b-button>
+            <ModalFormReport></ModalFormReport>
         </div>
     </b-card>
 </template>
 
 <script>
+import ModalFormReport from '@/components/modals/ModalFormReport';
+
 export default {
-    name: 'survivor',
+
+    name: 'survivors',
+    components: {
+      ModalFormReport
+    },
     props: {
         name: {
             type: String,

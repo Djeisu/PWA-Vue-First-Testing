@@ -57,22 +57,20 @@
         </b-col>
         <b-col cols="4">
           <b-form-group class="text-center"
-            label="Generate Fake Location"
+            label="Fake Location"
           >
             <b-button type="button" variant="outline-primary" block v-on:click="randomLocation()">Click Here!</b-button>
           </b-form-group>
         </b-col>
       </b-row>
       
-      <div class="mt-3 d-flex justify-content-center">
-        <b-button type="submit" class="mr-1" variant="primary">Submit</b-button>
-        <b-button type="reset" variant="danger">Reset</b-button>
-      </div>
+      <b-button block type="submit" class="mr-1" variant="primary">Submit</b-button>
+      <b-button block type="reset" variant="outline-danger">Reset</b-button>
 
     </b-form>
-    <b-card class="mt-3" header="Form Data Result">
+    <!-- <b-card class="mt-3" header="Form Data Result">
       <pre class="m-0">{{ form }}</pre>
-    </b-card>
+    </b-card> -->
   </div>
 </template>
 
